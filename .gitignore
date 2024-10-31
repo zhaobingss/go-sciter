@@ -14,7 +14,7 @@
 *.dll
 
 # Fortran module files
-*.mod
+#*.mod
 
 # Compiled Static libraries
 *.lai
@@ -32,3 +32,5 @@ sciter-sdk*/
 
 # editor config
 .vscode/
+/.idea/go-sciter.iml
+/.idea/

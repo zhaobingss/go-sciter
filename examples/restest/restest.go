@@ -1,11 +1,11 @@
 package main
 
 import (
-	"log"
-	tool "github.com/GeertJohan/go.rice"
-	sciter "github.com/sciter-sdk/go-sciter"
-	rice "github.com/sciter-sdk/go-sciter/rice"
-	window "github.com/sciter-sdk/go-sciter/window"
+    "log"
+    tool "github.com/GeertJohan/go.rice"
+    sciter "github.com/zhaobingss/go-sciter"
+    rice "github.com/zhaobingss/go-sciter/rice"
+    window "github.com/zhaobingss/go-sciter/window"
 )
 
 /*
@@ -20,24 +20,24 @@ To build it you need an actual `go.rice` package and its tool:
 Now the resulting executable is completely stand-alone.
 */
 func main() {
-	// As usual, create a sciter window.
-	w, err := window.New(sciter.SW_TITLEBAR|sciter.SW_RESIZEABLE|sciter.SW_CONTROLS|sciter.SW_MAIN, nil)
-	if err != nil {
-		log.Fatal(err)
-	}
+    // As usual, create a sciter window.
+    w, err := window.New(sciter.SW_TITLEBAR|sciter.SW_RESIZEABLE|sciter.SW_CONTROLS|sciter.SW_MAIN, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
 
-	// 1. Handle resources via sciter.rice loader.
-	// It handles URLs like `file://box/` and `rice://box/`.
-	rice.HandleDataLoad(w.Sciter)
+    // 1. Handle resources via sciter.rice loader.
+    // It handles URLs like `file://box/` and `rice://box/`.
+    rice.HandleDataLoad(w.Sciter)
 
-	// 2. A dummy call to allow `go.rice` to package and register that folder.
-	tool.MustFindBox("res")
+    // 2. A dummy call to allow `go.rice` to package and register that folder.
+    tool.MustFindBox("res")
 
-	// 3. Load a packaged resource.
-	err = w.LoadFile("rice://res/simple.html")
-	if err != nil {
-		log.Fatal(err)
-	}
-	w.Show()
-	w.Run()
+    // 3. Load a packaged resource.
+    err = w.LoadFile("rice://res/simple.html")
+    if err != nil {
+        log.Fatal(err)
+    }
+    w.Show()
+    w.Run()
 }

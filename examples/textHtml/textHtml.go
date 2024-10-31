@@ -1,14 +1,14 @@
 package main
 
 import (
-	"log"
+    "log"
 
-	"github.com/sciter-sdk/go-sciter"
-	"github.com/sciter-sdk/go-sciter/window"
+    "github.com/zhaobingss/go-sciter"
+    "github.com/zhaobingss/go-sciter/window"
 )
 
 const (
-	html = `
+    html = `
 <html resizeable>
 <body>
   <H1>test for element.Text and element.Html</H1>
@@ -32,26 +32,26 @@ const (
 )
 
 func main() {
-	w, err := window.New(sciter.DefaultWindowCreateFlag, sciter.DefaultRect)
-	if err != nil {
-		log.Fatal("sciter create window failed", err)
-	}
+    w, err := window.New(sciter.DefaultWindowCreateFlag, sciter.DefaultRect)
+    if err != nil {
+        log.Fatal("sciter create window failed", err)
+    }
 
-	w.SetTitle("test for element.Text and element.Html")
-	w.LoadHtml(html, "")
+    w.SetTitle("test for element.Text and element.Html")
+    w.LoadHtml(html, "")
 
-	root, err := w.GetRootElement()
-	if err != nil {
-		log.Fatal(err)
-	}
-	text, err := root.Text()
-	if err != nil {
-		log.Fatal(err)
-	}
-	log.Println("text:", text)
-	text, err = root.Html(false)
-	if err != nil {
-		log.Fatal(err)
-	}
-	log.Println("html:", text)
+    root, err := w.GetRootElement()
+    if err != nil {
+        log.Fatal(err)
+    }
+    text, err := root.Text()
+    if err != nil {
+        log.Fatal(err)
+    }
+    log.Println("text:", text)
+    text, err = root.Html(false)
+    if err != nil {
+        log.Fatal(err)
+    }
+    log.Println("html:", text)
 }

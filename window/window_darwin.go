@@ -1,3 +1,4 @@
+//go:build darwin
 // +build darwin
 
 package window
@@ -44,47 +45,47 @@ void ShowWindow(void * w) {
 */
 import "C"
 import (
-	"fmt"
-	"unsafe"
+    "fmt"
+    "unsafe"
 
-	"github.com/sciter-sdk/go-sciter"
+    "github.com/zhaobingss/go-sciter"
 )
 
 func New(creationFlags sciter.WindowCreationFlag, rect *sciter.Rect) (*Window, error) {
-	w := new(Window)
-	w.creationFlags = creationFlags
-	// create window
-	hwnd := sciter.CreateWindow(
-		creationFlags,
-		rect,
-		0,
-		0,
-		sciter.BAD_HWINDOW)
+    w := new(Window)
+    w.creationFlags = creationFlags
+    // create window
+    hwnd := sciter.CreateWindow(
+        creationFlags,
+        rect,
+        0,
+        0,
+        sciter.BAD_HWINDOW)
 
-	if hwnd == sciter.BAD_HWINDOW {
-		return nil, fmt.Errorf("Sciter CreateWindow failed")
-	}
+    if hwnd == sciter.BAD_HWINDOW {
+        return nil, fmt.Errorf("Sciter CreateWindow failed")
+    }
 
-	w.Sciter = sciter.Wrap(hwnd)
-	return w, nil
+    w.Sciter = sciter.Wrap(hwnd)
+    return w, nil
 }
 func (s *Window) SetTitle(title string) {
-	t := C.CString(title)
-	C.SetWindowTitle(unsafe.Pointer(s.GetHwnd()), t)
-	C.free(unsafe.Pointer(t))
+    t := C.CString(title)
+    C.SetWindowTitle(unsafe.Pointer(s.GetHwnd()), t)
+    C.free(unsafe.Pointer(t))
 }
 
 // Add a simple menu with a Quit item in it.
 func (s *Window) AddQuitMenu() {
-	C.MinimalMenu()
+    C.MinimalMenu()
 }
 
 func (s *Window) Show() {
-	C.ShowWindow(unsafe.Pointer(s.GetHwnd()))
+    C.ShowWindow(unsafe.Pointer(s.GetHwnd()))
 }
 
 func (s *Window) Run() {
-	s.run()
+    s.run()
 
-	C.Run()
+    C.Run()
 }
